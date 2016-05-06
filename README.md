@@ -18,4 +18,4 @@ Once you have the client id, set it up on the const string located in App.xaml.c
 
 ## Notes
 
-"Code/IrcClient.cs" and "Code/TwitchIrcClient.cs" are un altered from my personal bot projects.  Only difference is they are compiled into separate libraries instead of beind placed directly into the application.  The WPF application itself is to demonstrate the library's usage.  In my personal projects I also use Json.NET, but for the purpose of keeping this open source version external-library-free, I've used the Microsoft Json Serializer located in "Code/Json/*".
+"Code/IrcClient.cs" and "Code/TwitchIrcClient.cs" are un altered from my personal bot projects.  Only difference is they are compiled into separate libraries instead of being placed directly into the application.  The WPF application itself is to demonstrate the library's usage.  In my personal projects I also use Json.NET to get verious json results from the Twitch API, but for the purpose of keeping this open source version external-library-free, I've used the Microsoft Json Serializer located in "Code/Json/*".

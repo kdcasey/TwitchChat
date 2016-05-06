@@ -1,0 +1,40 @@
+﻿<Window x:Class="TwitchChat.Dialog.WhisperWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:h="clr-namespace:TwitchChat.Helpers"
+        Title="{Binding UserName, StringFormat=Whisper {0}}" Height="300" Width="300" MinHeight="300" MinWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Disabled" h:ScrollViewerEx.AutoScroll="True" Padding="4">
+            <ItemsControl ItemsSource="{Binding Messages}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="WrapWithOverflow">
+                            <Run Text="{Binding User, StringFormat={}{0}: }" FontWeight="Bold" Foreground="{Binding Color}" />
+                            <Run Text="{Binding Message}" />
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBox Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding SendCommand}" Key="Return" />
+                </TextBox.InputBindings>
+            </TextBox>
+            <Button Grid.Column="1" Padding="10, 4" Command="{Binding SendCommand}">Send</Button>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,61 @@
+﻿<Window x:Class="TwitchChat.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TwitchChat"
+        xmlns:c="clr-namespace:TwitchChat.Controls"
+        mc:Ignorable="d"
+        Title="{Binding CurrentChannel.ChannelName, StringFormat='Twitch Chat - {0}'}" MinHeight="250" MinWidth="325">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <Menu>
+                <MenuItem Header="_File">
+                    <MenuItem Header="_Login" Command="{Binding LoginCommand}"></MenuItem>
+                    <MenuItem Header="_Logout" Command="{Binding LogoutCommand}"></MenuItem>
+                </MenuItem>
+            </Menu>
+            <ToolBar>
+                <TextBox Width="100" Text="{Binding NewChannelName, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding JoinCommand}" Key="Return" />
+                    </TextBox.InputBindings>
+                </TextBox>
+                <Button Command="{Binding JoinCommand}">Join</Button>
+                <TextBox Width="100" Text="{Binding NewWhisperUserName, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding WhisperCommand}" Key="Return" />
+                    </TextBox.InputBindings>
+                </TextBox>
+                <Button Command="{Binding WhisperCommand}">Whisper</Button>
+            </ToolBar>
+        </StackPanel>
+        <TabControl Grid.Row="1" ItemsSource="{Binding Channels}"
+                    SelectedItem="{Binding CurrentChannel, Mode=TwoWay}">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding ChannelName}"/>
+                        <Button Grid.Column="1" Command="{Binding PartCommand}" Content="r" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" FontFamily="Webdings" ToolTip="Close" Margin="4, 0, 0, 0"/>
+                    </Grid>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <c:Channel DataContext="{Binding Path=.}"></c:Channel>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+    </Grid>
+</Window>

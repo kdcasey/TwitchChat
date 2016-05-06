@@ -9,6 +9,7 @@ I use a separate version in my personal projects, but decided to share my starti
 
 ## Setup
 
+This is a solution created Microsoft Visual Studio.  You can get a free edition (which was used to create this) from this link https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx
 To use you need to create a Twitch Application by logging into Twitch and going to this link https://www.twitch.tv/kraken/oauth2/clients/new
 
 Set the name to anything and the redirect URI to "http://dummy".

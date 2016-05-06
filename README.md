@@ -4,7 +4,7 @@
 
 This project is just to share how to make a twitch client using C# and WPF.
 There are no extra libraries to install.  
-Code is heavily commented with links to the RPF and Twitch IRC github.
+Code is heavily commented with links to the relevant RFCs, Twitch IRC Documentation, and various Stackoverflow Articles that helped me along the way.
 I use a separate version in my personal projects, but decided to share my starting point.
 
 ## Setup

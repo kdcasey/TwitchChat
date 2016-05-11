@@ -8,7 +8,7 @@
     /// </summary>
     public partial class App : Application
     {
-        //  My client id, feel free to plugin your own
+        //  Create a client id for twitch application that redirects to http://dummy
         public const string CLIENTID = "";
         public const int MAXMESSAGES = 150;
 

@@ -18,7 +18,7 @@
         public TwitchIrcClient()
         {
             //  Get available servers and initialize IrcClient with the first one
-            using (var wc = new WebClient())
+            using (var wc = new TwitchApiClient())
             {
                 var result = Json.Helper.Parse<TwitchServerResult>(wc.DownloadData("http://tmi.twitch.tv/servers?channel=twitch"));
                 var server = result.servers.First().Split(':');

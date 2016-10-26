@@ -2,15 +2,27 @@
 {
     using System.Windows;
     using Dialog;
-
+    using System.Configuration;
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
-        //  Create a client id for twitch application that redirects to http://dummy
-        public const string CLIENTID = "";
-        public const int MAXMESSAGES = 150;
+        //  Read settings from app.config
+        public static string CLIENTID
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["twitch-api:client-id"];
+            }
+        }
+        public static int MAXMESSAGES
+        {
+            get
+            {
+                return int.Parse(ConfigurationManager.AppSettings["twitch-api:maxmessages"]);
+            }
+        }
 
         private MainWindowViewModel _vm;
 

@@ -74,6 +74,7 @@
             _irc.WhisperReceived += OnWhisperReceived;
             _irc.Connected += OnConnected;
             _irc.Disconnected += OnDisconnected;
+            
 
             //  Setup delegate commands
             LoginCommand = new RelayCommand(Login, () => !IsLoggedIn);
@@ -95,18 +96,27 @@
         private void OnConnected(object sender, EventArgs e)
         {
             NotifyPropertyChanged("IsLoggedIn");
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _join(_irc.User);
+            });
+        }
+
+        void _join(string channel)
+        {
+            if (!Channels.Any(x => x.ChannelName == channel))
+            {
+                var vm = new Controls.ChannelViewModel(_irc, channel);
+                vm.Parted += OnParted;
+                Channels.Add(vm);
+                CurrentChannel = vm;
+            }
         }
 
         //  Join a new channel
         void Join()
         {
-            if (!Channels.Any(x => x.ChannelName == NewChannelName))
-            {
-                var vm = new Controls.ChannelViewModel(_irc, NewChannelName);
-                vm.Parted += OnParted;
-                Channels.Add(vm);
-                CurrentChannel = vm;
-            }
+            _join(NewChannelName);
             NewChannelName = string.Empty;
         }
 
@@ -132,7 +142,7 @@
         {
             if (!Whispers.Any(x => x.UserName.ToLower() == NewWhisperUserName.ToLower()))
             {
-                using (var wc = new WebClient())
+                using (var wc = new TwitchApiClient())
                 {
                     try
                     {
@@ -160,10 +170,8 @@
 
             try
             {
-                using (var wc = new WebClient())
+                using (var wc = new TwitchApiClient(token))
                 {
-                    wc.Headers.Add("Accept", "application/vnd.twitchtv.v3+json");
-                    wc.Headers.Add("Authorization", "OAuth " + token);
                     var result = Json.Helper.Parse<TwitchUserResult>(wc.DownloadData("https://api.twitch.tv/kraken/user"));
 
                     _irc.Login(result.name, "oauth:" + token);

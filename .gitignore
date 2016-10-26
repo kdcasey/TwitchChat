@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/TwitchChat/bin/Debug
+/TwitchChat/obj/Debug
+/.vs/TwitchChat/v14

@@ -72,7 +72,7 @@
             SendCommand = new DelegateCommand(Send);
             PartCommand = new DelegateCommand(Part);
 
-            using (var wc = new WebClient())
+            using (var wc = new TwitchApiClient())
             {
                 _badges = Json.Helper.Parse<BadgesResult>(wc.DownloadData(string.Format("https://api.twitch.tv/kraken/chat/{0}/badges", channelName)));
             }

@@ -13,7 +13,8 @@
         {
             get
             {
-                return ConfigurationManager.AppSettings["twitch-api:client-id"];
+                return "3dmexn5qkifporcjhosedliq4sd8h0";
+                //return ConfigurationManager.AppSettings["twitch-api:client-id"];
             }
         }
         public static int MAXMESSAGES

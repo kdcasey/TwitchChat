@@ -5,3 +5,9 @@
 /TwitchChat/bin/Debug
 /TwitchChat/obj/Debug
 /.vs/TwitchChat/v14
+
+\.vs/TwitchChat/v15/\.suo
+
+\.vs/TwitchChat/v15/Server/sqlite3/db\.lock
+
+\.vs/TwitchChat/v15/Server/sqlite3/storage\.ide
